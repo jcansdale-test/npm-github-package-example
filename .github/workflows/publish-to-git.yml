@@ -17,10 +17,10 @@ jobs:
           node-version: 12.x
       - name: install
         run: npm install
-      - name: test
-        run: npm test
-      - run: |
-          npm pack
+      - name: pack
+        run: npm pack
+      - name: Publish to Git
+        run: |          
           tar -xzvf *.tgz
           cd package
           git init
