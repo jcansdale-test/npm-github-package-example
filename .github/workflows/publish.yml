@@ -56,10 +56,12 @@ jobs:
           tar -xzvf *.tgz
           cd package
           git init
+          git checkout -b package
+          git remote add origin https://token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git fetch
+          git reset origin/package
+          git add .
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          git remote add origin https://token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git checkout -b package-${{ github.sha }}
-          git add .
           git commit -m "new package"
           git push --set-upstream origin package-${{ github.sha }}
