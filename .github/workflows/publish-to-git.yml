@@ -1,0 +1,35 @@
+name: Publish package to Git
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  publish-to-git:
+    name: Publish to Git
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: install
+        run: npm install
+      - name: test
+        run: npm test
+      - run: |
+          npm pack
+          tar -xzvf *.tgz
+          cd package
+          git init
+          git checkout -b package
+          git remote add origin https://token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git fetch
+          git reset origin/package
+          git add .
+          git config --global user.email "you@example.com"
+          git config --global user.name "Package Publisher"
+          git commit -m "new package"
+          git push --set-upstream origin package
