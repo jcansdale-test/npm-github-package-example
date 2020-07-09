@@ -58,7 +58,7 @@ jobs:
           git init
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
-          git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git remote add origin https://token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git checkout -b package-${{ github.sha }}
           git add .
           git commit -m "new package"
