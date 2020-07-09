@@ -31,5 +31,5 @@ jobs:
           git add .
           git config --global user.email "you@example.com"
           git config --global user.name "Package Publisher"
-          git commit -m "new package"
+          git commit -m "Built package from ${{ github.sha }}" --allow-empty
           git push --set-upstream origin package
