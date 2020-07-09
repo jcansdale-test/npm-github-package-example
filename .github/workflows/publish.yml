@@ -64,4 +64,4 @@ jobs:
           git config --global user.email "you@example.com"
           git config --global user.name "Your Name"
           git commit -m "new package"
-          git push --set-upstream origin package-${{ github.sha }}
+          git push --set-upstream origin package
